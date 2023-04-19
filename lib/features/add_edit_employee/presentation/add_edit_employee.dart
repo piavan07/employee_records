@@ -288,10 +288,14 @@ class AddEditEmployeeRecord extends StatelessWidget {
                               )
                             : Container(),
                         state is AddEmployeeSuccess
-                            ? const Padding(
-                                padding: EdgeInsets.only(top: 11.5),
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 11.5),
                                 child: MessageWidget(
-                                    "Employee added successfully"),
+                                    provider.isInEditMode
+                                        ? "Employee updated successfully"
+                                        : "Employee added successfully", () {
+                                  Navigator.pop(context);
+                                }),
                               )
                             : Container()
                       ],

@@ -1,5 +1,4 @@
 import 'package:employee_management/core/data/entities/employee_data.dart';
-import 'package:employee_management/core/errors/failures.dart';
 import 'package:equatable/equatable.dart';
 
 class AddEditEvent extends Equatable {

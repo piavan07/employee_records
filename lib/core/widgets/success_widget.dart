@@ -2,8 +2,9 @@ import 'package:employee_management/core/theme/app_style.dart';
 import 'package:flutter/material.dart';
 
 class MessageWidget extends StatelessWidget {
+  final VoidCallback voidCallback;
   final String text;
-  const MessageWidget(this.text, {super.key});
+  const MessageWidget(this.text, this.voidCallback, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,17 @@ class MessageWidget extends StatelessWidget {
               style: AppTextStyles()
                   .mediumBlack
                   .copyWith(color: AppColors().white),
+            ),
+            GestureDetector(
+              child: Text(
+                "Go Back!",
+                style: AppTextStyles()
+                    .mediumBlack
+                    .copyWith(color: AppColors().primaryColor),
+              ),
+              onTap: () {
+                voidCallback();
+              },
             ),
           ],
         ),

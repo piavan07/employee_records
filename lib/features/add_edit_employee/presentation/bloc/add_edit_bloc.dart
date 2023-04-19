@@ -107,13 +107,16 @@ class AddEditBloc extends Bloc<AddEditEvent, AddEditState> {
       yield AddEmployeeInProgress();
       EmployeeData employeeData = EmployeeData(
           nameController.text, roleController.text, fromDateTime!, toDateTime);
+      if (isInEditMode) {
+        await _delEmployeeById(uuid);
+      }
       final result = await _insertEmployeeRecord(employeeData);
       yield* result.fold((Failure failure) async* {
         yield AddEmployeeFailure(failure);
       }, (r) async* {
         yield AddEmployeeSuccess();
         Future.delayed(
-          const Duration(seconds: 2),
+          const Duration(seconds: 3),
           () {
             add(AddEditPageOpened(employeeData));
           },

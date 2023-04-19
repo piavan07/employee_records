@@ -40,20 +40,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         currentEmployees.clear();
         previousEmployees.clear();
 
-        currentEmployees.addAll(r.where((element) => element.toDate == null));
-        currentEmployees.addAll(r.where((element) =>
-            (element.toDate != null &&
-                element.toDate!.isBefore(DateTime.now())) ||
-            (element.toDate != null &&
-                element.toDate!.isSameDate(DateTime.now()))));
-
-        r.removeWhere((element) => currentEmployees
-            .map((e) => e.uuid)
-            .toList()
-            .contains(element.uuid));
-
-        previousEmployees.addAll(r);
-
+        for (var element in r) {
+          if (element.toDate == null) {
+            currentEmployees.add(element);
+          } else if (element.toDate != null) {
+            if (element.toDate!.isAfter(DateTime.now())) {
+              currentEmployees.add(element);
+            } else {
+              previousEmployees.add(element);
+            }
+          }
+        }
         yield HomePageLoadSuccess();
       });
     } else if (event is DelEmployeeTapped) {

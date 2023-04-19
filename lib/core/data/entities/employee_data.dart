@@ -1,6 +1,6 @@
 import 'package:employee_management/core/constants/constants.dart';
+import 'package:employee_management/core/utils/date_time_ext.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart';
 part 'employee_data.g.dart';
 
 @HiveType(typeId: 0)
@@ -23,12 +23,12 @@ class EmployeeData extends HiveObject {
   EmployeeData(this.name, this.role, this.fromDate, this.toDate);
 
   get fromDateString {
-    return DateFormat(Constants.dateFormat).format(fromDate);
+    return fromDate.formatDate();
   }
 
   get toDateString {
     if (toDate != null) {
-      return DateFormat(Constants.dateFormat).format(toDate!);
+      return toDate!.formatDate();
     }
     return "";
   }
@@ -37,7 +37,7 @@ class EmployeeData extends HiveObject {
     if (toDate != null) {
       return "$fromDateString - $toDateString";
     } else {
-      return "From $fromDateString";
+      return "$fromDateString";
     }
   }
 }

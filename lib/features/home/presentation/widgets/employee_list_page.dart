@@ -60,7 +60,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                       itemCount: currentEmployees.length,
                       itemBuilder: (context, index) {
                         return _item(
-                            context, index, currentEmployees, provider);
+                            context, index, currentEmployees, provider, true);
                       },
                       separatorBuilder: (context, index) {
                         return const Divider(
@@ -94,7 +94,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                       itemCount: previousEmployees.length,
                       itemBuilder: (context, index) {
                         return _item(
-                            context, index, previousEmployees, provider);
+                            context, index, previousEmployees, provider, false);
                       },
                       separatorBuilder: (context, index) {
                         return const Divider(
@@ -127,7 +127,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
   }
 
   Widget _item(BuildContext ctx, int index, List<EmployeeData> employeeList,
-      HomeBloc provider) {
+      HomeBloc provider, bool currentEmployee) {
     return SwipeActionCell(
       controller: controller,
       index: index,
@@ -149,7 +149,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
       ],
       child: Container(
         color: Colors.white,
-        child: GestureDetector(
+        child: InkWell(
           onTap: () {
             Navigator.push(
               context,
@@ -182,7 +182,9 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                   height: 6,
                 ),
                 Text(
-                  employeeList[index].formattedTime,
+                  currentEmployee
+                      ? "From ${employeeList[index].formattedTime}"
+                      : employeeList[index].formattedTime,
                   textAlign: TextAlign.start,
                   style: AppTextStyles().smallGrey,
                 ),
