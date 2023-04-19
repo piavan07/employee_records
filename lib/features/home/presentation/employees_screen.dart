@@ -65,7 +65,7 @@ class EmployeeScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const AddEditEmployeeRecord(null)),
-                              );
+                              ).then((value) => provider.add(HomePageOpened()));
                             },
                           ),
                         ),

@@ -32,7 +32,7 @@ class _CustomDatePickerDialogState extends State<CustomDatePickerDialog> {
     }
     if (!widget.selectingFromDate &&
         date == null &&
-        selectedType != SelectedType.none) {
+        selectedType != SelectedType.nodate) {
       date = widget.toDateTime;
     }
 
@@ -108,12 +108,12 @@ class _CustomDatePickerDialogState extends State<CustomDatePickerDialog> {
                         child: Row(
                           children: [
                             Flexible(
-                              child: (selectedType == SelectedType.none)
+                              child: (selectedType == SelectedType.nodate)
                                   ? CustomButton(
                                       () {
                                         setState(() {
                                           date = null;
-                                          selectedType = SelectedType.none;
+                                          selectedType = SelectedType.nodate;
                                         });
                                       },
                                       "No date",
@@ -124,7 +124,7 @@ class _CustomDatePickerDialogState extends State<CustomDatePickerDialog> {
                                   : CustomButton(() {
                                       setState(() {
                                         date = null;
-                                        selectedType = SelectedType.none;
+                                        selectedType = SelectedType.nodate;
                                       });
                                     }, "No date"),
                             ),
@@ -341,4 +341,4 @@ class _CustomDatePickerDialogState extends State<CustomDatePickerDialog> {
   }
 }
 
-enum SelectedType { today, nextMonday, nextTuesday, afterOneWeek, none }
+enum SelectedType { today, nextMonday, nextTuesday, afterOneWeek, nodate, none }
